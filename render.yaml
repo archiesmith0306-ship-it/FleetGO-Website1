@@ -2,13 +2,13 @@ services:
   - type: web
     name: fleetgo-website
     env: static
-    buildCommand: pnpm run build
+    buildCommand: pnpm install --no-frozen-lockfile && pnpm run build
     staticPublishPath: ./dist
     envVars:
       - key: NODE_VERSION
         value: 20
-      - key: PNPM_FLAGS
-        value: "--no-frozen-lockfile"
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
     routes:
       - type: rewrite
         source: /*

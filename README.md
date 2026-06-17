@@ -19,12 +19,12 @@ A modern, minimalistic business website for FleetGO, a professional fleet manage
 
 ## Company Information
 
-- **Phone**: 331-313-8474
-- **Email**: archie.white@myfleetgo.com
+- **Phone**: 331-336-5707
+- **Email**: info@myfleetgo.com
 - **Address**: 1811 W Diehl Road Suite 200, Naperville, IL 60563
-- **Experience**: 4+ years in the industry
+- **Founded**: 2026 — founder-led, built on 4+ years of hands-on industry experience
 
-### Trusted Partners
+### Trusted Vendors
 - Penske
 - Ryder
 - MHC Kenworth

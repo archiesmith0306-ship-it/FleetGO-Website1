@@ -29,7 +29,7 @@ export default function Hero() {
         >
           <div className="w-2 h-2 bg-[#c8970d] rounded-full animate-pulse"></div>
           <span className="font-oswald uppercase tracking-[0.2em] text-[#c8970d] text-sm">
-            4+ Years of Proven Excellence
+            Built on 4+ Years of Industry Experience
           </span>
         </motion.div>
 
@@ -83,11 +83,11 @@ export default function Hero() {
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
           <a
-            href="tel:3313138474"
+            href="tel:+13313365707"
             className="group font-oswald uppercase tracking-wider border-2 border-white/40 hover:border-white hover:bg-white/10 text-white px-8 py-4 text-base flex items-center gap-3 transition-all"
           >
             <Phone className="w-5 h-5" />
-            (331) 313-8474
+            (331) 336-5707
           </a>
         </motion.div>
 
@@ -121,7 +121,7 @@ export default function Hero() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-yellow-600">
             {[
-              { value: '4+', label: 'Years in Business' },
+              { value: '4+', label: 'Years Experience' },
               { value: '500+', label: 'Service Locations' },
               { value: '24/7', label: 'Live Support' },
               { value: '100%', label: 'Vetted Partners' },

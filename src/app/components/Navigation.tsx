@@ -42,18 +42,18 @@ export default function Navigation({ isMenuOpen, setIsMenuOpen }: NavigationProp
               </button>
             ))}
             <a
-              href="tel:3313138474"
+              href="tel:+13313365707"
               className="font-oswald uppercase tracking-wider flex items-center gap-2 bg-[#c8970d] hover:bg-[#a87b0a] text-white px-6 py-5 transition-all text-sm ml-0"
             >
               <Phone className="w-4 h-4" />
-              <span>(331) 313-8474</span>
+              <span>(331) 336-5707</span>
             </a>
           </div>
 
           {/* Mobile: phone + hamburger */}
           <div className="md:hidden flex items-center gap-2">
             <a
-              href="tel:3313138474"
+              href="tel:+13313365707"
               className="bg-[#c8970d] text-white p-2.5 rounded"
             >
               <Phone className="w-4 h-4" />
@@ -89,11 +89,11 @@ export default function Navigation({ isMenuOpen, setIsMenuOpen }: NavigationProp
                   </button>
                 ))}
                 <a
-                  href="tel:3313138474"
+                  href="tel:+13313365707"
                   className="font-oswald uppercase tracking-wider flex items-center justify-center gap-2 bg-[#c8970d] text-white px-4 py-4 text-sm mt-1"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>Call Now: (331) 313-8474</span>
+                  <span>Call Now: (331) 336-5707</span>
                 </a>
               </div>
             </motion.div>

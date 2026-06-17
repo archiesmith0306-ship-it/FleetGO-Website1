@@ -44,13 +44,13 @@ export default function App() {
             <div>
               <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">Contact</h4>
               <div className="space-y-4 text-sm">
-                <a href="tel:3313138474" className="flex items-center gap-2 text-slate-400 hover:text-[#c8970d] transition-colors">
+                <a href="tel:+13313365707" className="flex items-center gap-2 text-slate-400 hover:text-[#c8970d] transition-colors">
                   <Phone className="w-4 h-4 text-[#c8970d]" />
-                  (331) 313-8474
+                  (331) 336-5707
                 </a>
-                <a href="mailto:archie.white@myfleetgo.com" className="flex items-start gap-2 text-slate-400 hover:text-[#c8970d] transition-colors break-all">
+                <a href="mailto:info@myfleetgo.com" className="flex items-start gap-2 text-slate-400 hover:text-[#c8970d] transition-colors break-all">
                   <Mail className="w-4 h-4 text-[#c8970d] flex-shrink-0 mt-0.5" />
-                  archie.white@myfleetgo.com
+                  info@myfleetgo.com
                 </a>
                 <div className="flex items-start gap-2 text-slate-500 text-sm">
                   <MapPin className="w-4 h-4 text-[#c8970d] flex-shrink-0 mt-0.5" />
@@ -75,7 +75,7 @@ export default function App() {
 
             {/* Partners */}
             <div>
-              <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">Industry Partners</h4>
+              <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">Trusted Vendors</h4>
               <ul className="space-y-2.5 text-sm text-slate-500">
                 {['Penske', 'Ryder', 'MHC Kenworth', 'Samsara', 'NationaLease', 'Boss Truck Shops'].map((p) => (
                   <li key={p} className="flex items-center gap-2">

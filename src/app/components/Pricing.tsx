@@ -147,11 +147,11 @@ export default function Pricing() {
             </div>
             <div className="p-6 space-y-3">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <span className="text-slate-600 text-sm">1–25 Truckers</span>
+                <span className="text-slate-600 text-sm">1–25 Trucks</span>
                 <span className="font-oswald text-xl text-[#0b1829]">$30<span className="text-sm text-slate-500">/tender</span></span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-600 text-sm">26+ Truckers</span>
+                <span className="text-slate-600 text-sm">26+ Trucks</span>
                 <span className="font-oswald text-xl text-[#c8970d]">$20<span className="text-sm text-slate-500">/tender</span></span>
               </div>
             </div>

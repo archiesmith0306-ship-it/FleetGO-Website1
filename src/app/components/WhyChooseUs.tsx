@@ -3,7 +3,7 @@ import { Shield, Clock, Award, TrendingUp, Headphones, CheckCircle, Phone } from
 
 const features = [
   { icon: Clock, title: '24/7 Support', description: 'Round-the-clock fleet assistance and emergency roadside support, every day of the year.' },
-  { icon: Award, title: '4+ Years Experience', description: 'Proven track record with industry leaders like Penske, Ryder, and MHC Kenworth.' },
+  { icon: Award, title: '4+ Years Experience', description: 'Founder-led with 4+ years of hands-on industry experience and a network of trusted vendors like Penske, Ryder, and MHC Kenworth.' },
   { icon: Shield, title: 'Compliance Guaranteed', description: 'ELD compliance, DOT regulations, and all industry standards maintained for your fleet.' },
   { icon: TrendingUp, title: 'Cost Optimization', description: 'Reduce downtime and maintenance costs with our preventative care programs.' },
   { icon: Headphones, title: 'Dedicated Team', description: 'Personal account managers who know your fleet and are committed to your success.' },
@@ -65,18 +65,18 @@ export default function WhyChooseUs() {
         <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="font-oswald uppercase text-2xl text-white">Ready to Optimize Your Fleet?</h3>
-            <p className="text-slate-400 mt-1">Join industry leaders who trust FleetGO for their operations.</p>
+            <p className="text-slate-400 mt-1">Join the fleets that trust FleetGO for their operations.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
             <a
-              href="tel:3313138474"
+              href="tel:+13313365707"
               className="font-oswald uppercase tracking-wider bg-[#c8970d] hover:bg-[#a87b0a] text-white px-7 py-3.5 text-sm flex items-center gap-2 transition-all"
             >
               <Phone className="w-4 h-4" />
-              Call Now: (331) 313-8474
+              Call Now: (331) 336-5707
             </a>
             <a
-              href="mailto:archie.white@myfleetgo.com"
+              href="mailto:info@myfleetgo.com"
               className="font-oswald uppercase tracking-wider border border-white/30 hover:border-white text-white px-7 py-3.5 text-sm flex items-center gap-2 transition-all"
             >
               Get Free Consultation

@@ -38,7 +38,7 @@ export default function Contact() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <a
-              href="tel:3313138474"
+              href="tel:+13313365707"
               className="group flex items-start gap-4 border border-white/20 hover:border-[#c8970d] p-5 transition-all"
             >
               <div className="bg-[#c8970d] p-3 flex-shrink-0">
@@ -47,7 +47,7 @@ export default function Contact() {
               <div>
                 <div className="font-oswald uppercase tracking-wider text-slate-400 text-xs mb-1">Call Us</div>
                 <div className="font-oswald text-white text-xl group-hover:text-[#c8970d] transition-colors">
-                  (331) 313-8474
+                  (331) 336-5707
                 </div>
                 <div className="text-slate-500 text-xs mt-1 flex items-center gap-1">
                   <Clock className="w-3 h-3" /> Available 24/7
@@ -56,7 +56,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="mailto:archie.white@myfleetgo.com"
+              href="mailto:info@myfleetgo.com"
               className="group flex items-start gap-4 border border-white/20 hover:border-[#c8970d] p-5 transition-all"
             >
               <div className="bg-[#c8970d] p-3 flex-shrink-0">
@@ -65,7 +65,7 @@ export default function Contact() {
               <div>
                 <div className="font-oswald uppercase tracking-wider text-slate-400 text-xs mb-1">Email Us</div>
                 <div className="font-oswald text-white text-base group-hover:text-[#c8970d] transition-colors break-all">
-                  archie.white@myfleetgo.com
+                  info@myfleetgo.com
                 </div>
               </div>
             </a>
@@ -90,7 +90,7 @@ export default function Contact() {
       {/* Map */}
       <div className="h-[340px] border-b border-slate-200">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2974.0846879155643!2d-88.16911!3d41.79333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e572e8c8e8e8f%3A0x0!2s1811%20W%20Diehl%20Rd%2C%20Naperville%2C%20IL%2060563!5e0!3m2!1sen!2sus!4v1234567890"
+          src="https://maps.google.com/maps?q=1811%20W%20Diehl%20Road%2C%20Suite%20200%2C%20Naperville%2C%20IL%2060563&hl=en&z=15&output=embed"
           width="100%"
           height="100%"
           style={{ border: 0 }}

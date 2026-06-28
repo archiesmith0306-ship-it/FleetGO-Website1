@@ -100,7 +100,7 @@ export default function Hero() {
         >
           {[
             { icon: Clock, text: '24/7 Live Support' },
-            { icon: MapPin, text: '500+ Service Locations' },
+            { icon: MapPin, text: '300+ Service Locations' },
             { icon: Phone, text: 'No Hidden Fees' },
           ].map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-2">
@@ -122,7 +122,7 @@ export default function Hero() {
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-yellow-600">
             {[
               { value: '4+', label: 'Years Experience' },
-              { value: '500+', label: 'Service Locations' },
+              { value: '300+', label: 'Service Locations' },
               { value: '24/7', label: 'Live Support' },
               { value: '100%', label: 'Vetted Partners' },
             ].map((stat) => (

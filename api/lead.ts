@@ -1,11 +1,14 @@
-// Vercel Serverless Function: receives a consultation lead from the website
-// and delivers it to you instantly via a Telegram bot.
+// Vercel Serverless Function: receives a consultation lead from the website,
+// notifies you on Telegram (one or more recipients), and appends it to a
+// Google Sheet for a permanent, searchable record.
 //
-// Required environment variables (set these in Vercel → Settings → Environment Variables):
-//   TELEGRAM_BOT_TOKEN  — the token from @BotFather (e.g. 123456:ABC-DEF...)
-//   TELEGRAM_CHAT_ID    — your chat id (or group id) the bot should message
+// Environment variables (Vercel → Settings → Environment Variables):
+//   TELEGRAM_BOT_TOKEN  — bot token from @BotFather
+//   TELEGRAM_CHAT_ID    — one chat id, or several separated by commas
+//   GSHEET_WEBHOOK_URL  — (optional) Google Apps Script web-app URL that
+//                         appends a row to the "FleetGO Marketing Leads" sheet
 //
-// The secrets live only on the server, never in the frontend bundle.
+// Secrets live only on the server, never in the frontend bundle.
 
 export const config = { runtime: 'nodejs' };
 
@@ -36,11 +39,10 @@ export default async function handler(req: any, res: any) {
     }
 
     const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
-    if (!token || !chatId) {
-      res.status(500).json({ ok: false, error: 'Lead delivery is not configured yet.' });
-      return;
-    }
+    const chatIds = (process.env.TELEGRAM_CHAT_ID || '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
 
     const text =
       '🚚 New FleetGO Lead\n\n' +
@@ -51,18 +53,46 @@ export default async function handler(req: any, res: any) {
       `Fleet size: ${fleetSize || '—'}\n\n` +
       `Message:\n${message}`;
 
-    const tg = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
-    });
+    const jobs: Promise<any>[] = [];
 
-    if (!tg.ok) {
-      const detail = await tg.text().catch(() => '');
-      res.status(502).json({ ok: false, error: 'Could not deliver the lead.', detail });
+    // Notify every configured Telegram recipient.
+    if (token && chatIds.length) {
+      for (const chatId of chatIds) {
+        jobs.push(
+          fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
+          }).catch(() => null)
+        );
+      }
+    }
+
+    // Append to the Google Sheet, if configured.
+    if (process.env.GSHEET_WEBHOOK_URL) {
+      jobs.push(
+        fetch(process.env.GSHEET_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            timestamp: new Date().toISOString(),
+            name,
+            email,
+            phone,
+            company,
+            fleetSize,
+            message,
+          }),
+        }).catch(() => null)
+      );
+    }
+
+    if (!jobs.length) {
+      res.status(500).json({ ok: false, error: 'Lead delivery is not configured yet.' });
       return;
     }
 
+    await Promise.allSettled(jobs);
     res.status(200).json({ ok: true });
   } catch (err: any) {
     res.status(500).json({ ok: false, error: err?.message || 'Unexpected error' });

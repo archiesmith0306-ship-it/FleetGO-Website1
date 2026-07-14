@@ -226,11 +226,11 @@ export default function Contact() {
                         className="w-full px-4 py-3 bg-white border border-slate-300 focus:outline-none focus:border-[#c8970d] focus:ring-1 focus:ring-[#c8970d] transition-all text-slate-900 text-sm"
                       >
                         <option value="">Select size</option>
-                        <option value="1-9">1–9 trucks</option>
-                        <option value="10-19">10–19 trucks</option>
-                        <option value="20-29">20–29 trucks</option>
-                        <option value="30-50">30–50 trucks</option>
-                        <option value="50+">50+ trucks</option>
+                        <option value="1-10">1–10 trucks</option>
+                        <option value="11-20">11–20 trucks</option>
+                        <option value="21-30">21–30 trucks</option>
+                        <option value="31-50">31–50 trucks</option>
+                        <option value="51+">51+ trucks</option>
                       </select>
                     </div>
                   </div>

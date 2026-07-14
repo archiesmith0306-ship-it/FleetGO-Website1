@@ -1,16 +1,11 @@
 const partners = [
-  'Penske',
-  'Ryder',
-  'NationaLease',
-  'Samsara',
-  'GoMotive',
-  'TEL360',
-  'MHC Kenworth',
-  'Boss Truck Shops',
-  'STM Tires',
-  'TA-Petro',
-  "Love's Travel Stops",
-  'Pilot Flying J',
+  'Primeweek Inc',
+  'Dadakhon Trans',
+  '2M Trucking',
+  'TR Auto Trucking',
+  'Siddikov LLC',
+  'Verona Express',
+  'Jaykhun Cargo',
 ];
 
 export default function TrustedPartners() {
@@ -21,7 +16,7 @@ export default function TrustedPartners() {
       {/* Label row */}
       <div className="max-w-7xl mx-auto px-6">
         <p className="font-oswald uppercase tracking-[0.25em] text-xs text-slate-500 text-center py-4 border-b border-slate-200">
-          Industry Partners &amp; Trusted Vendors
+          Trusted by Trucking Operations Nationwide
         </p>
       </div>
 

@@ -75,9 +75,9 @@ export default function App() {
 
             {/* Partners */}
             <div>
-              <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">Trusted Vendors</h4>
+              <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">Trusted By</h4>
               <ul className="space-y-2.5 text-sm text-slate-500">
-                {['Penske', 'Ryder', 'MHC Kenworth', 'Samsara', 'NationaLease', 'Boss Truck Shops'].map((p) => (
+                {['Primeweek Inc', 'Dadakhon Trans', '2M Trucking', 'TR Auto Trucking', 'Siddikov LLC', 'Verona Express'].map((p) => (
                   <li key={p} className="flex items-center gap-2">
                     <span className="text-[#c8970d]">›</span> {p}
                   </li>

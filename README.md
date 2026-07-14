@@ -34,6 +34,23 @@ A modern, minimalistic business website for FleetGO, a professional fleet manage
 - Dadakhon Trans Corp
 - Primeweek
 
+## Lead Notifications (Telegram)
+
+Consultation form submissions POST to the serverless function at `api/lead.ts`,
+which forwards each lead to a Telegram bot so you're notified instantly.
+
+Set these environment variables in **Vercel → Settings → Environment Variables**
+(never commit them to the repo):
+
+- `TELEGRAM_BOT_TOKEN` — from [@BotFather](https://t.me/BotFather) after `/newbot`
+- `TELEGRAM_CHAT_ID` — your personal or group chat id
+
+To find your chat id: message your new bot once, then open
+`https://api.telegram.org/bot<YOUR_TOKEN>/getUpdates` and copy `result[].message.chat.id`.
+
+If the endpoint is unreachable, the form falls back to opening the visitor's
+email client addressed to info@myfleetgo.com.
+
 ## Tech Stack
 
 - **Framework**: React 18 with TypeScript

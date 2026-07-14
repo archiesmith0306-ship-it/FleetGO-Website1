@@ -14,8 +14,23 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your inquiry! We will get back to you shortly.');
+
+    const subject = `Fleet inquiry from ${formData.name || 'website visitor'}`;
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone || '—'}`,
+      `Company: ${formData.company || '—'}`,
+      `Fleet size: ${formData.fleetSize || '—'}`,
+      '',
+      'Message:',
+      formData.message,
+    ].join('\n');
+
+    // Open the visitor's email client pre-filled and addressed to our inbox.
+    window.location.href = `mailto:info@myfleetgo.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

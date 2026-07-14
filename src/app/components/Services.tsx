@@ -19,7 +19,7 @@ const extras = [
   },
   {
     category: 'Supply Chain',
-    items: ['Tender Tracking & Control', 'Load Distribution', 'Vendor Relationships'],
+    items: ['Trailer Tracking & Control', 'Load Distribution', 'Vendor Relationships'],
   },
   {
     category: 'Technology',

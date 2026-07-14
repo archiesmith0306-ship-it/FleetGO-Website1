@@ -2,11 +2,11 @@ import { motion } from 'motion/react';
 import { Check, Zap } from 'lucide-react';
 
 const pricingPlans = [
-  { trucks: '1–9 Trucks', price: '$100', unit: '/truck/mo', popular: false },
-  { trucks: '10–19 Trucks', price: '$90', unit: '/truck/mo', popular: true },
-  { trucks: '20–29 Trucks', price: '$80', unit: '/truck/mo', popular: false },
-  { trucks: '30–50 Trucks', price: '$70', unit: '/truck/mo', popular: false },
-  { trucks: '50+ Trucks', price: 'Negotiable', unit: '', popular: false },
+  { trucks: '1–10 Trucks', price: '$100', unit: '/truck/mo', popular: false },
+  { trucks: '11–20 Trucks', price: '$90', unit: '/truck/mo', popular: true },
+  { trucks: '21–30 Trucks', price: '$80', unit: '/truck/mo', popular: false },
+  { trucks: '31–50 Trucks', price: '$70', unit: '/truck/mo', popular: false },
+  { trucks: '51+ Trucks', price: 'Negotiable', unit: '', popular: false },
 ];
 
 const features = [
@@ -143,16 +143,16 @@ export default function Pricing() {
         >
           <div className="border border-slate-300 bg-white">
             <div className="bg-[#0b1829] px-6 py-3">
-              <h4 className="font-oswald uppercase tracking-wider text-white">Tender Tracking & Control</h4>
+              <h4 className="font-oswald uppercase tracking-wider text-white">Trailer Tracking & Control</h4>
             </div>
             <div className="p-6 space-y-3">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <span className="text-slate-600 text-sm">1–25 Trucks</span>
-                <span className="font-oswald text-xl text-[#0b1829]">$30<span className="text-sm text-slate-500">/tender</span></span>
+                <span className="text-slate-600 text-sm">1–25 Trailers</span>
+                <span className="font-oswald text-xl text-[#0b1829]">$30<span className="text-sm text-slate-500">/trailer</span></span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-600 text-sm">26+ Trucks</span>
-                <span className="font-oswald text-xl text-[#c8970d]">$20<span className="text-sm text-slate-500">/tender</span></span>
+                <span className="text-slate-600 text-sm">26+ Trailers</span>
+                <span className="font-oswald text-xl text-[#c8970d]">$20<span className="text-sm text-slate-500">/trailer</span></span>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { Shield, Clock, Award, TrendingUp, Headphones, CheckCircle, Phone } from
 
 const features = [
   { icon: Clock, title: '24/7 Support', description: 'Round-the-clock fleet assistance and emergency roadside support, every day of the year.' },
-  { icon: Award, title: '4+ Years Experience', description: 'Founder-led with 4+ years of hands-on industry experience and a network of trusted vendors like Penske, Ryder, and MHC Kenworth.' },
+  { icon: Award, title: '4+ Years Experience', description: 'Founder-led with 4+ years of hands-on industry experience and a nationwide network of trusted vendors and repair partners.' },
   { icon: Shield, title: 'Compliance Guaranteed', description: 'ELD compliance, DOT regulations, and all industry standards maintained for your fleet.' },
   { icon: TrendingUp, title: 'Cost Optimization', description: 'Reduce downtime and maintenance costs with our preventative care programs.' },
   { icon: Headphones, title: 'Dedicated Team', description: 'Personal account managers who know your fleet and are committed to your success.' },

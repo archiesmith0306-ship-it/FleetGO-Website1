@@ -3,18 +3,19 @@ import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
+  const emptyForm = {
     name: '',
     email: '',
     phone: '',
     company: '',
     fleetSize: '',
     message: '',
-  });
+    website: '', // honeypot — must stay empty
+  };
+  const [formData, setFormData] = useState(emptyForm);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const mailtoFallback = () => {
     const subject = `Fleet inquiry from ${formData.name || 'website visitor'}`;
     const body = [
       `Name: ${formData.name}`,
@@ -26,11 +27,28 @@ export default function Contact() {
       'Message:',
       formData.message,
     ].join('\n');
-
-    // Open the visitor's email client pre-filled and addressed to our inbox.
     window.location.href = `mailto:info@myfleetgo.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error('request failed');
+      setStatus('sent');
+      setFormData(emptyForm);
+    } catch {
+      // If the lead API isn't reachable, fall back to the visitor's email client.
+      setStatus('error');
+      mailtoFallback();
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -148,8 +166,8 @@ export default function Contact() {
 
               <div className="mt-8 border-l-4 border-[#c8970d] pl-4 bg-yellow-50 py-4 pr-4">
                 <p className="text-sm text-slate-700">
-                  <strong className="text-[#0b1829]">Trusted clients include:</strong> Dadakhon Trans Corp and Primeweek —
-                  real trucking operations that rely on FleetGO every single day.
+                  <strong className="text-[#0b1829]">Trusted clients include:</strong> Primeweek Inc, Dadakhon Trans, 2M Trucking,
+                  Verona Express, and more — real trucking operations that rely on FleetGO every single day.
                 </p>
               </div>
             </motion.div>
@@ -266,13 +284,38 @@ export default function Contact() {
                     />
                   </div>
 
+                  {/* Honeypot — hidden from real users, catches bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
+
                   <button
                     type="submit"
-                    className="w-full font-oswald uppercase tracking-wider bg-[#c8970d] hover:bg-[#a87b0a] text-white py-4 flex items-center justify-center gap-2 transition-all text-sm"
+                    disabled={status === 'sending'}
+                    className="w-full font-oswald uppercase tracking-wider bg-[#c8970d] hover:bg-[#a87b0a] disabled:opacity-60 text-white py-4 flex items-center justify-center gap-2 transition-all text-sm"
                   >
-                    Send Message
+                    {status === 'sending' ? 'Sending…' : 'Send Message'}
                     <Send className="w-4 h-4" />
                   </button>
+
+                  {status === 'sent' && (
+                    <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-3">
+                      Thanks! Your request was sent — our team will be in touch shortly.
+                    </p>
+                  )}
+                  {status === 'error' && (
+                    <p className="text-sm text-slate-600">
+                      We opened your email app as a backup — just hit send, or reach us at{' '}
+                      <a href="mailto:info@myfleetgo.com" className="text-[#c8970d] underline">info@myfleetgo.com</a>.
+                    </p>
+                  )}
                 </form>
               </div>
             </motion.div>

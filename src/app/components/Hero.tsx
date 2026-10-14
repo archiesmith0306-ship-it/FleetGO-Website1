@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Phone, ArrowRight, MapPin, Clock } from 'lucide-react';
+import { Phone, ArrowRight, MapPin, Clock, LogIn } from 'lucide-react';
 import Logo from './Logo';
 import HeroVideoBackground from './HeroVideoBackground';
 
@@ -85,6 +85,15 @@ export default function Hero() {
           >
             <Phone className="w-5 h-5" />
             (331) 336-5707
+          </a>
+          <a
+            href="https://pti-guardian-bot.lovable.app/auth"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group font-oswald uppercase tracking-wider border-2 border-[#c8970d] text-[#c8970d] hover:bg-[#c8970d] hover:text-white px-8 py-4 text-base flex items-center gap-3 transition-all"
+          >
+            <LogIn className="w-5 h-5" />
+            Login
           </a>
         </motion.div>
 

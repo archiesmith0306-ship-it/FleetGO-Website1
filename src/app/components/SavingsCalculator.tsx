@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowUpRight, Fuel } from 'lucide-react';
+import { track } from '../lib/analytics';
 
 const fmt = (n: number) =>
   '$' + Math.round(n).toLocaleString('en-US');
@@ -9,6 +10,13 @@ export default function SavingsCalculator() {
   const [trucks, setTrucks] = useState(10);
   const [gallons, setGallons] = useState(1700);
   const [cpg, setCpg] = useState(0.12);
+
+  const used = useRef(false);
+  const markUsed = () => {
+    if (used.current) return;
+    used.current = true;
+    track('fuel_calculator_used');
+  };
 
   const grossMonthly = trucks * gallons * cpg;
   const fee = grossMonthly * 0.25;
@@ -84,7 +92,10 @@ export default function SavingsCalculator() {
                     max={c.max}
                     step={c.step}
                     value={c.value}
-                    onChange={(e) => c.set(Number(e.target.value))}
+                    onChange={(e) => {
+                      c.set(Number(e.target.value));
+                      markUsed();
+                    }}
                     aria-label={c.label}
                     className="w-full accent-[#c8970d] cursor-pointer"
                   />

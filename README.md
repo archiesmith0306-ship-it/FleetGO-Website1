@@ -51,6 +51,18 @@ To find your chat id: message your new bot once, then open
 If the endpoint is unreachable, the form falls back to opening the visitor's
 email client addressed to info@myfleetgo.com.
 
+## Analytics
+
+- **Google Analytics 4** (`G-HE2MGKWBS1`) — `src/app/lib/analytics.ts`. Loads only on
+  myfleetgo.com, so previews and local testing never skew numbers. Add `?ga_debug=1` to any URL
+  to force it on and watch events live in GA4 → Admin → DebugView.
+- Page views are recorded automatically on every route change (GA4 enhanced measurement).
+- Custom events: `generate_lead` (form submitted), `phone_call_click`, `email_click`,
+  `portal_login_click`, `quote_cta_click`, `fleet_size_estimate`, `fuel_calculator_used`,
+  `platform_preview`, `truck_hotspot_view`, `truck_hood_toggle`, `lead_form_fallback`.
+  No names, emails or phone numbers are sent to Google.
+- **Vercel Web Analytics + Speed Insights** — enable in the Vercel dashboard.
+
 ## Sales Documents
 
 Editable, print-ready quote templates live in `docs/quotes/` (HTML source + PDF):

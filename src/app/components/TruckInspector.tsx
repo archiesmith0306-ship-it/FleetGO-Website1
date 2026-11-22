@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Check, RotateCcw } from 'lucide-react';
 import { HOTSPOTS, type Hotspot } from '../data/hotspots';
+import { track } from '../lib/analytics';
 
 // Three.js is heavy — only pulled in once the section is near the viewport.
 const TruckScene = lazy(() => import('./TruckScene'));
@@ -11,6 +12,15 @@ export default function TruckInspector() {
   const [hoodOpen, setHoodOpen] = useState(false);
   const [active, setActive] = useState<Hotspot>(HOTSPOTS[0]);
   const ref = useRef<HTMLDivElement>(null);
+
+  const select = (h: Hotspot) => {
+    setActive(h);
+    track('truck_hotspot_view', { hotspot: h.id });
+  };
+  const toggleHood = () => {
+    track('truck_hood_toggle', { open: !hoodOpen });
+    setHoodOpen(!hoodOpen);
+  };
 
   useEffect(() => {
     const el = ref.current;
@@ -71,7 +81,7 @@ export default function TruckInspector() {
                 <TruckScene
                   hoodOpen={hoodOpen}
                   activeId={active.id}
-                  onSelect={setActive}
+                  onSelect={select}
                 />
               </Suspense>
             ) : (
@@ -85,7 +95,7 @@ export default function TruckInspector() {
             {/* Controls */}
             <div className="absolute bottom-3 left-3 z-20 flex flex-wrap gap-2">
               <button
-                onClick={() => setHoodOpen((v) => !v)}
+                onClick={toggleHood}
                 className={`font-mono text-[10px] uppercase tracking-[0.14em] px-3 py-2 border transition-colors ${
                   hoodOpen
                     ? 'bg-[#c8970d] text-[#0b1829] border-[#c8970d] font-bold'
@@ -106,7 +116,7 @@ export default function TruckInspector() {
               {HOTSPOTS.map((h) => (
                 <button
                   key={h.id}
-                  onClick={() => setActive(h)}
+                  onClick={() => select(h)}
                   className={`font-mono text-[10px] uppercase tracking-[0.12em] px-3 py-2 border transition-colors ${
                     h.id === active.id
                       ? 'bg-[#c8970d] text-[#0b1829] border-[#c8970d] font-bold'

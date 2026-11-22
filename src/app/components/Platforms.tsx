@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { PLATFORMS } from '../data/platforms';
+import { track } from '../lib/analytics';
 
 export default function Platforms() {
   const [open, setOpen] = useState(0);
@@ -54,7 +55,10 @@ export default function Platforms() {
               return (
                 <div key={p.slug} className="border-b border-slate-200">
                   <button
-                    onClick={() => setOpen(i)}
+                    onClick={() => {
+                      setOpen(i);
+                      track('platform_preview', { platform: p.slug });
+                    }}
                     className="w-full flex items-start gap-5 py-5 text-left group"
                   >
                     <span

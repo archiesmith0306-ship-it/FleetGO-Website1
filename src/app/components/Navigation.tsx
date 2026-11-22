@@ -1,99 +1,166 @@
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Phone, ChevronRight } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, ChevronRight, LogIn } from 'lucide-react';
 import Logo from './Logo';
+import { COMPANY, PLATFORMS } from '../data/platforms';
 
-interface NavigationProps {
-  isMenuOpen: boolean;
-  setIsMenuOpen: (value: boolean) => void;
-}
+const SECTIONS = [
+  { label: 'Inspection', hash: '#inspection' },
+  { label: 'Fuel savings', hash: '#savings' },
+  { label: 'Pricing', hash: '#pricing' },
+  { label: 'FAQ', hash: '#faq' },
+  { label: 'Contact', hash: '#contact' },
+];
 
-export default function Navigation({ isMenuOpen, setIsMenuOpen }: NavigationProps) {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
+export default function Navigation() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [platformsOpen, setPlatformsOpen] = useState(false);
+  const location = useLocation();
+
+  // Close menus whenever the route or hash changes.
+  useEffect(() => {
+    setMobileOpen(false);
+    setPlatformsOpen(false);
+  }, [location.pathname, location.hash]);
+
+  const linkCls =
+    'font-display font-semibold uppercase tracking-wide text-[13px] text-slate-300 hover:text-white px-4 h-16 flex items-center transition-colors';
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0b1829] border-b border-white/10 shadow-xl">
-      <div className="max-w-7xl mx-auto px-6 py-0">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0b1829]/95 backdrop-blur border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="cursor-pointer flex-shrink-0"
-            onClick={() => scrollToSection('home')}
-          >
-            <Logo className="h-9 text-white" />
-          </motion.div>
+          <Link to="/" aria-label="FleetGO home" className="flex-shrink-0">
+            <Logo className="h-9" />
+          </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-0">
-            {['services', 'pricing', 'contact'].map((section) => (
-              <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className="font-oswald uppercase tracking-wider text-sm text-slate-300 hover:text-white hover:bg-white/10 px-5 py-5 transition-all border-r border-white/10 first:border-l"
-              >
-                {section}
-              </button>
-            ))}
-            <a
-              href="tel:+13313365707"
-              className="font-oswald uppercase tracking-wider flex items-center gap-2 bg-[#c8970d] hover:bg-[#a87b0a] text-white px-6 py-5 transition-all text-sm ml-0"
+          {/* Desktop */}
+          <div className="hidden lg:flex items-center">
+            <div
+              className="relative"
+              onMouseEnter={() => setPlatformsOpen(true)}
+              onMouseLeave={() => setPlatformsOpen(false)}
             >
-              <Phone className="w-4 h-4" />
-              <span>(331) 336-5707</span>
+              <button
+                onClick={() => setPlatformsOpen((v) => !v)}
+                aria-expanded={platformsOpen}
+                className={`${linkCls} gap-1.5`}
+              >
+                Platforms
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${platformsOpen ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {platformsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute left-0 top-full w-[440px] bg-[#0b1829] border border-white/10 shadow-2xl p-2 grid grid-cols-2 gap-1"
+                  >
+                    {PLATFORMS.map((p, i) => (
+                      <Link
+                        key={p.slug}
+                        to={`/platforms/${p.slug}`}
+                        className="group p-3 hover:bg-white/5 transition-colors"
+                      >
+                        <div className="font-mono text-[10px] tracking-[0.14em] text-[#c8970d] mb-1">
+                          {String(i + 1).padStart(2, '0')} · {p.billing === 'addon' ? 'ADD-ON' : 'CORE'}
+                        </div>
+                        <div className="font-display font-bold text-sm text-white group-hover:text-[#c8970d] transition-colors">
+                          {p.name}
+                        </div>
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {SECTIONS.map((s) => (
+              <Link key={s.hash} to={{ pathname: '/', hash: s.hash }} className={linkCls}>
+                {s.label}
+              </Link>
+            ))}
+
+            <a
+              href={COMPANY.portalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-3 font-display font-semibold uppercase tracking-wide text-[13px] border border-[#c8970d]/60 text-[#c8970d] hover:bg-[#c8970d] hover:text-[#0b1829] px-4 py-2 flex items-center gap-1.5 transition-colors"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              Login
+            </a>
+            <a
+              href={COMPANY.phoneHref}
+              className="ml-2 font-display font-bold uppercase tracking-wide text-[13px] bg-[#c8970d] hover:bg-[#a87b0a] text-[#0b1829] px-4 py-2 flex items-center gap-1.5 transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              {COMPANY.phone}
             </a>
           </div>
 
-          {/* Mobile: phone + hamburger */}
-          <div className="md:hidden flex items-center gap-2">
-            <a
-              href="tel:+13313365707"
-              className="bg-[#c8970d] text-white p-2.5 rounded"
-            >
+          {/* Mobile toggles */}
+          <div className="lg:hidden flex items-center gap-2">
+            <a href={COMPANY.phoneHref} aria-label="Call FleetGO" className="bg-[#c8970d] text-[#0b1829] p-2.5">
               <Phone className="w-4 h-4" />
             </a>
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2.5 hover:bg-white/10 rounded transition-colors text-white"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileOpen}
+              className="p-2.5 text-white hover:bg-white/10 transition-colors"
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         <AnimatePresence>
-          {isMenuOpen && (
+          {mobileOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden overflow-hidden border-t border-white/10"
+              className="lg:hidden overflow-hidden border-t border-white/10"
             >
-              <div className="py-2">
-                {['services', 'pricing', 'contact'].map((section) => (
-                  <button
-                    key={section}
-                    onClick={() => scrollToSection(section)}
-                    className="font-oswald uppercase tracking-wider flex items-center justify-between w-full text-left text-slate-300 hover:text-white hover:bg-white/10 px-4 py-3.5 text-sm transition-colors border-b border-white/5"
+              <div className="py-3 max-h-[75vh] overflow-y-auto">
+                <div className="font-mono text-[10px] tracking-[0.16em] text-[#c8970d] px-4 pt-2 pb-1">
+                  PLATFORMS
+                </div>
+                {PLATFORMS.map((p) => (
+                  <Link
+                    key={p.slug}
+                    to={`/platforms/${p.slug}`}
+                    className="flex items-center justify-between px-4 py-3 text-slate-200 hover:bg-white/5 text-sm"
                   >
-                    {section}
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
+                    {p.name}
+                    <ChevronRight className="w-4 h-4 text-slate-500" />
+                  </Link>
+                ))}
+                <div className="h-px bg-white/10 my-2" />
+                {SECTIONS.map((s) => (
+                  <Link
+                    key={s.hash}
+                    to={{ pathname: '/', hash: s.hash }}
+                    className="flex items-center justify-between px-4 py-3 font-display font-semibold uppercase tracking-wide text-sm text-slate-300 hover:bg-white/5"
+                  >
+                    {s.label}
+                    <ChevronRight className="w-4 h-4 text-slate-500" />
+                  </Link>
                 ))}
                 <a
-                  href="tel:+13313365707"
-                  className="font-oswald uppercase tracking-wider flex items-center justify-center gap-2 bg-[#c8970d] text-white px-4 py-4 text-sm mt-1"
+                  href={COMPANY.portalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mx-4 mt-3 font-display font-bold uppercase tracking-wide text-sm border border-[#c8970d] text-[#c8970d] py-3 flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-4 h-4" />
-                  <span>Call Now: (331) 336-5707</span>
+                  <LogIn className="w-4 h-4" />
+                  Login
                 </a>
               </div>
             </motion.div>

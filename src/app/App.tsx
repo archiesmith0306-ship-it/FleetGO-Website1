@@ -1,117 +1,33 @@
-import { useState } from 'react';
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import { Phone, Mail, MapPin } from 'lucide-react';
-import Hero from './components/Hero';
-import CoverageMap from './components/CoverageMap';
-import Services from './components/Services';
-import WhyChooseUs from './components/WhyChooseUs';
-import TrustedPartners from './components/TrustedPartners';
-import Promise from './components/Promise';
-import Platforms from './components/Platforms';
-import SavingsCalculator from './components/SavingsCalculator';
-import FAQ from './components/FAQ';
-import TruckInspector from './components/TruckInspector';
-import Pricing from './components/Pricing';
-import Contact from './components/Contact';
 import Navigation from './components/Navigation';
-import Logo from './components/Logo';
+import Footer from './components/Footer';
+import { MobileCTA, ScrollManager } from './components/RouteHelpers';
+import Home from './pages/Home';
+const PlatformPage = lazy(() => import('./pages/PlatformPage'));
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
-    <div className="size-full bg-white text-[#0b1829] overflow-y-auto">
-      <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <Hero />
-      <TrustedPartners />
-      <Promise />
-      <Platforms />
-      <CoverageMap />
-      <Services />
-      <WhyChooseUs />
-      <TruckInspector />
-      <SavingsCalculator />
-      <Pricing />
-      <FAQ />
-      <Contact />
-
-      {/* Footer */}
-      <footer className="bg-[#060e1a] text-slate-400 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-14">
-          <div className="grid md:grid-cols-4 gap-10 mb-12">
-            {/* Brand */}
-            <div className="md:col-span-1">
-              <Logo className="h-10 text-white mb-4" />
-              <p className="text-slate-500 text-sm leading-relaxed mb-5">
-                Your trusted partner in fleet management and logistics — keeping American trucks moving since 2026.
-              </p>
-              <div className="inline-flex items-center gap-2 border border-[#c8970d]/40 px-3 py-1.5">
-                <span className="w-2 h-2 bg-[#c8970d] rounded-full animate-pulse" />
-                <span className="font-oswald uppercase tracking-wider text-[#c8970d] text-xs">Excellence Since 2026</span>
-              </div>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">Contact</h4>
-              <div className="space-y-4 text-sm">
-                <a href="tel:+13313365707" className="flex items-center gap-2 text-slate-400 hover:text-[#c8970d] transition-colors">
-                  <Phone className="w-4 h-4 text-[#c8970d]" />
-                  (331) 336-5707
-                </a>
-                <a href="mailto:info@myfleetgo.com" className="flex items-start gap-2 text-slate-400 hover:text-[#c8970d] transition-colors break-all">
-                  <Mail className="w-4 h-4 text-[#c8970d] flex-shrink-0 mt-0.5" />
-                  info@myfleetgo.com
-                </a>
-                <div className="flex items-start gap-2 text-slate-500 text-sm">
-                  <MapPin className="w-4 h-4 text-[#c8970d] flex-shrink-0 mt-0.5" />
-                  <span>1811 W Diehl Road, Suite 200<br />Naperville, IL 60563</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">Services</h4>
-              <ul className="space-y-2.5 text-sm">
-                {['Fleet Management', 'Preventative Maintenance', '24/7 Support', 'ELD Compliance', 'Work Order Mgmt', 'Driver Support'].map((s) => (
-                  <li key={s}>
-                    <span className="text-slate-500 hover:text-slate-300 transition-colors cursor-pointer flex items-center gap-2">
-                      <span className="text-[#c8970d]">›</span> {s}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Partners */}
-            <div>
-              <h4 className="font-oswald uppercase tracking-wider text-white text-sm mb-5">By the Numbers</h4>
-              <ul className="space-y-2.5 text-sm text-slate-500">
-                {['13 carrier partners', '400 trucks managed', '1,000+ service locations', '48 states covered', '24/7 live coverage', '14 in-house specialists'].map((p) => (
-                  <li key={p} className="flex items-center gap-2">
-                    <span className="text-[#c8970d]">›</span> {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom bar */}
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-slate-600 text-xs">
-              &copy; 2026 FleetGO. All rights reserved. Serving the logistics industry since 2026.
-            </p>
-            <div className="flex gap-6 text-slate-600 text-xs">
-              <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-slate-300 transition-colors">Terms of Service</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+    <BrowserRouter>
+      <ScrollManager />
+      <div className="min-h-screen bg-white text-[#0b1829] pb-14 lg:pb-0">
+        <Navigation />
+        <main>
+          <Suspense fallback={<div className="min-h-screen bg-[#060e1a]" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/platforms/:slug" element={<PlatformPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+        <MobileCTA />
+      </div>
       <Analytics />
       <SpeedInsights />
-    </div>
+    </BrowserRouter>
   );
 }

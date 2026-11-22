@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, ArrowUpRight, LogIn } from 'lucide-react';
+import { Phone, ArrowUpRight, LogIn, Minus, Plus } from 'lucide-react';
 import HeroVideoBackground from './HeroVideoBackground';
 import { COMPANY, STATS, CORE_TIERS } from '../data/platforms';
 import { track } from '../lib/analytics';
@@ -59,9 +59,12 @@ function rateFor(trucks: number) {
 
 export default function Hero() {
   const [active, setActive] = useState(PINS[3]);
-  const [trucks, setTrucks] = useState(20);
+  // Keep what the visitor types as text so the field can be cleared and retyped freely.
+  const [raw, setRaw] = useState('20');
+  const trucks = Math.min(500, Math.max(0, parseInt(raw, 10) || 0));
+  const setCount = (n: number) => setRaw(String(Math.min(500, Math.max(1, n))));
 
-  const { rate, tier } = rateFor(trucks);
+  const { rate, tier } = trucks ? rateFor(trucks) : { rate: 0, tier: '—' };
   const monthly = rate ? rate * trucks : 0;
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -199,24 +202,49 @@ export default function Hero() {
       <div className="relative z-20 border-t border-white/10 bg-[#060e1a]/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 divide-x divide-white/10">
-            <label className="py-4 pr-5 block">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 block mb-1.5">
-                Your fleet size
-              </span>
-              <input
-                type="number"
-                min={1}
-                max={500}
-                value={trucks}
-                onChange={(e) => setTrucks(Math.max(1, Math.min(500, Number(e.target.value) || 1)))}
-                onBlur={() => track('fleet_size_estimate', { trucks })}
-                className="w-full bg-transparent text-white font-display font-bold text-xl focus:outline-none border-b border-white/20 focus:border-[#c8970d] transition-colors"
-              />
-            </label>
+            <div className="py-4 pr-5">
+              <label htmlFor="hero-fleet-size" className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400 block mb-1.5">
+                Fleet size · trucks
+              </label>
+              <div className="flex items-stretch h-11 border border-white/30 bg-white/[0.06] hover:border-white/50 focus-within:border-[#c8970d]! focus-within:bg-white/10 transition-colors">
+                <button
+                  type="button"
+                  aria-label="Fewer trucks"
+                  onClick={() => setCount(trucks - 1)}
+                  className="w-9 flex-shrink-0 grid place-items-center text-slate-300 hover:text-[#0b1829] hover:bg-[#c8970d] transition-colors"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+                <input
+                  id="hero-fleet-size"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  autoComplete="off"
+                  placeholder="0"
+                  value={raw}
+                  onChange={(e) => setRaw(e.target.value.replace(/\D/g, '').slice(0, 3))}
+                  onFocus={(e) => e.target.select()}
+                  onBlur={() => {
+                    setCount(trucks || 1);
+                    track('fleet_size_estimate', { trucks: trucks || 1 });
+                  }}
+                  className="w-full min-w-0 bg-transparent text-center text-white caret-[#c8970d] font-display font-bold text-xl outline-none focus-visible:outline-none placeholder:text-slate-500"
+                />
+                <button
+                  type="button"
+                  aria-label="More trucks"
+                  onClick={() => setCount(trucks + 1)}
+                  className="w-9 flex-shrink-0 grid place-items-center text-slate-300 hover:text-[#0b1829] hover:bg-[#c8970d] transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
             {[
               { label: 'Plan tier', value: tier },
-              { label: 'Rate', value: rate ? `$${rate}/truck/mo` : 'Negotiable' },
-              { label: 'Est. monthly', value: monthly ? `$${monthly.toLocaleString('en-US')}` : "Let's talk" },
+              { label: 'Rate', value: !trucks ? '—' : rate ? `$${rate}/truck/mo` : 'Negotiable' },
+              { label: 'Est. monthly', value: !trucks ? '—' : monthly ? `$${monthly.toLocaleString('en-US')}` : "Let's talk" },
             ].map((cell) => (
               <div key={cell.label} className="py-4 px-5">
                 <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 block mb-1.5">

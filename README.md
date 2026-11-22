@@ -51,6 +51,15 @@ To find your chat id: message your new bot once, then open
 If the endpoint is unreachable, the form falls back to opening the visitor's
 email client addressed to info@myfleetgo.com.
 
+## Sales Documents
+
+Editable, print-ready quote templates live in `docs/quotes/` (HTML source + PDF):
+
+- `FleetGO_Quote_Fleet-Management_RoadWatch` — core per-truck tiers, RoadWatch, package totals, active-day billing
+- `FleetGO_Quote_Fuel-Saving` — 25% of verified savings, with how savings are measured
+
+Open the HTML in a browser and print to PDF (Letter, background graphics on) after filling in the bracketed fields.
+
 ## Tech Stack
 
 - **Framework**: React 18 with TypeScript

@@ -28,7 +28,7 @@ export default function Contact() {
       'Message:',
       formData.message,
     ].join('\n');
-    window.location.href = `mailto:info@myfleetgo.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:main@myfleetgo.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
   };
@@ -92,7 +92,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="mailto:info@myfleetgo.com"
+              href="mailto:main@myfleetgo.com"
               className="group flex items-start gap-4 border border-white/20 hover:border-[#c8970d] p-5 transition-all"
             >
               <div className="bg-[#c8970d] p-3 flex-shrink-0">
@@ -101,7 +101,7 @@ export default function Contact() {
               <div>
                 <div className="font-oswald uppercase tracking-wider text-slate-400 text-xs mb-1">Email Us</div>
                 <div className="font-oswald text-white text-base group-hover:text-[#c8970d] transition-colors break-all">
-                  info@myfleetgo.com
+                  main@myfleetgo.com
                 </div>
               </div>
             </a>
@@ -316,7 +316,7 @@ export default function Contact() {
                   {status === 'error' && (
                     <p className="text-sm text-slate-600">
                       We opened your email app as a backup — just hit send, or reach us at{' '}
-                      <a href="mailto:info@myfleetgo.com" className="text-[#c8970d] underline">info@myfleetgo.com</a>.
+                      <a href="mailto:main@myfleetgo.com" className="text-[#c8970d] underline">main@myfleetgo.com</a>.
                     </p>
                   )}
                 </form>

@@ -1,53 +1,8 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Phone, ArrowUpRight, LogIn, Minus, Plus } from 'lucide-react';
 import HeroVideoBackground from './HeroVideoBackground';
 import { COMPANY, STATS, CORE_TIERS } from '../data/platforms';
 import { track } from '../lib/analytics';
-
-/** Live fleet-operations events surfaced over the yard. Click to inspect. */
-const PINS = [
-  {
-    id: 'pti',
-    label: 'PTI PASSED 05:52',
-    top: '20%',
-    left: '9%',
-    platform: 'PTI Monitoring',
-    detail: 'Unit 2304 · pre-trip clean · no defects reported',
-  },
-  {
-    id: 'pm',
-    label: 'PM DUE IN 400 MI',
-    top: '13%',
-    left: '55%',
-    platform: 'PM Monitoring',
-    detail: 'Unit 4258 · service booked ahead of the interval',
-  },
-  {
-    id: 'alert',
-    label: 'ALERT · DRIVER CALLED',
-    top: '34%',
-    left: '26%',
-    platform: 'RoadWatch',
-    detail: 'Hard brake flagged · monitoring team called in 9 min',
-  },
-  {
-    id: 'fuel',
-    label: 'FUEL STOP · SAVED $84',
-    top: '25%',
-    left: '73%',
-    platform: 'Fuel Saving',
-    detail: '128 gal routed on-network · $0.66/gal under median',
-  },
-  {
-    id: 'case',
-    label: 'CASE CLOSED 14:08',
-    top: '43%',
-    left: '50%',
-    platform: 'Cases & Follow-ups',
-    detail: 'Work order issued · added to weekly expense statement',
-  },
-];
 
 function rateFor(trucks: number) {
   if (trucks <= 10) return { rate: 100, tier: CORE_TIERS[0].range };
@@ -58,7 +13,6 @@ function rateFor(trucks: number) {
 }
 
 export default function Hero() {
-  const [active, setActive] = useState(PINS[3]);
   // Keep what the visitor types as text so the field can be cleared and retyped freely.
   const [raw, setRaw] = useState('20');
   const trucks = Math.min(500, Math.max(0, parseInt(raw, 10) || 0));
@@ -70,47 +24,12 @@ export default function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col pt-16 overflow-hidden text-white">
+    <section id="home" className="relative min-h-[92vh] flex flex-col pt-16 overflow-hidden text-white">
       <HeroVideoBackground />
 
-      {/* Interactive yard pins */}
-      <div className="absolute inset-0 z-10 hidden lg:block pointer-events-none">
-        {PINS.map((pin) => {
-          const isActive = pin.id === active.id;
-          return (
-            <button
-              key={pin.id}
-              onClick={() => setActive(pin)}
-              style={{ top: pin.top, left: pin.left }}
-              className="absolute pointer-events-auto group flex items-center gap-2 focus:outline-none"
-            >
-              <span className="relative flex h-3 w-3 flex-shrink-0">
-                {isActive && (
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#c8970d] opacity-60" />
-                )}
-                <span
-                  className={`relative inline-flex h-3 w-3 rounded-full border-2 ${
-                    isActive ? 'bg-[#c8970d] border-[#c8970d]' : 'bg-white/90 border-white/60'
-                  }`}
-                />
-              </span>
-              <span
-                className={`font-mono text-[11px] tracking-[0.12em] px-2.5 py-1.5 border transition-colors ${
-                  isActive
-                    ? 'bg-[#c8970d] text-[#0b1829] border-[#c8970d] font-bold'
-                    : 'bg-[#0b1829]/85 text-slate-200 border-white/15 group-hover:border-[#c8970d]/70'
-                }`}
-              >
-                {pin.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
       {/* Main content */}
-      <div className="relative z-20 flex-1 flex items-end">
-        <div className="w-full max-w-7xl mx-auto px-6 pb-10 pt-28">
+      <div className="relative z-20 flex-1 flex items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 py-16">
           <div className="grid lg:grid-cols-[1.25fr_1fr] gap-10 items-end">
             <div>
               {/* Pill badge */}
@@ -129,44 +48,11 @@ export default function Hero() {
             </div>
 
             <div className="lg:pb-4">
-              <p className="text-slate-300 text-lg leading-relaxed mb-7 max-w-md">
-                Maintenance, inspections, safety and fuel — run by one {STATS.coverage} team on six
-                connected platforms. Point at any event in the yard and read what we did about it.
+              <p className="text-slate-200 text-lg leading-relaxed mb-8 max-w-md">
+                FleetGO is your outsourced fleet maintenance team. We watch every truck {STATS.coverage}
+                {' '}(service intervals, inspections, safety and fuel) and get problems fixed, so your
+                trucks stay on the road.
               </p>
-
-              {/* Active pin readout */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.22 }}
-                  className="border-l-2 border-[#c8970d] bg-[#0b1829]/80 pl-4 py-3 mb-7"
-                >
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#c8970d] mb-1">
-                    {active.platform}
-                  </div>
-                  <div className="text-sm text-slate-200">{active.detail}</div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Mobile: the yard pins become a swipeable chip row */}
-              <div className="lg:hidden flex gap-2 overflow-x-auto -mx-6 px-6 pb-1 mb-7 [scrollbar-width:none]">
-                {PINS.map((pin) => (
-                  <button
-                    key={pin.id}
-                    onClick={() => setActive(pin)}
-                    className={`flex-shrink-0 font-mono text-[10px] tracking-[0.12em] px-3 py-2 border transition-colors ${
-                      pin.id === active.id
-                        ? 'bg-[#c8970d] text-[#0b1829] border-[#c8970d] font-bold'
-                        : 'bg-[#0b1829]/80 text-slate-300 border-white/15'
-                    }`}
-                  >
-                    {pin.label}
-                  </button>
-                ))}
-              </div>
 
               <div className="flex flex-wrap gap-3">
                 <button

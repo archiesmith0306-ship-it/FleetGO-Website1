@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { ArrowUpRight, Check, RotateCcw } from 'lucide-react';
 import { HOTSPOTS, MODEL_CREDIT, type Hotspot } from '../data/hotspots';
 import { track } from '../lib/analytics';
+import SectionLabel from './SectionLabel';
 
 // Three.js is heavy — only pulled in once the section is near the viewport.
 const TruckScene = lazy(() => import('./TruckScene'));
@@ -49,12 +50,7 @@ export default function TruckInspector() {
         {/* Heading */}
         <div className="grid lg:grid-cols-[1.35fr_1fr] gap-8 items-end mb-12">
           <div>
-            <span className="inline-flex items-center gap-2 mb-5">
-              <span className="w-2 h-2 rounded-full border-2 border-[#c8970d]" />
-              <span className="font-mono uppercase tracking-[0.18em] text-[#c8970d] text-[11px]">
-                Inspection coverage
-              </span>
-            </span>
+            <SectionLabel id="inspection" className="mb-5" />
             <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.4vw,3.4rem)]">
               Every system we watch,{' '}
               <span className="text-[#c8970d] lg:block">on every truck.</span>

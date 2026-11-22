@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { track } from '../lib/analytics';
+import SectionLabel from './SectionLabel';
 
 export default function Contact() {
   const emptyForm = {
@@ -63,13 +64,9 @@ export default function Contact() {
       {/* Dark top bar with contact info */}
       <div className="bg-[#0b1829] py-14 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-1 bg-[#c8970d]" />
-            <span className="font-oswald uppercase tracking-[0.2em] text-[#c8970d] text-sm">Contact Us</span>
-          </div>
-          <h2 className="font-oswald uppercase text-4xl md:text-5xl text-white mb-10">
-            Let's Talk About<br />
-            <span className="text-[#c8970d]">Your Fleet</span>
+          <SectionLabel id="contact" />
+          <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.4vw,3.4rem)] text-white mb-10">
+            Let's talk about <span className="text-[#c8970d]">your fleet.</span>
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -148,29 +145,35 @@ export default function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="font-oswald uppercase text-2xl text-[#0b1829] mb-4">Why Choose FleetGO?</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                Whether you manage 5 trucks or 500, we have the expertise and dedication to keep
-                your fleet operating at peak efficiency.
+              <h3 className="font-display font-extrabold tracking-[-0.02em] text-2xl text-[#0b1829] mb-2">
+                What happens next
+              </h3>
+              <p className="text-slate-600 mb-7 leading-relaxed">
+                Send the form and here is exactly what to expect. No obligation at any step.
               </p>
-              <ul className="space-y-4">
+              <ol className="border-l-2 border-[#c8970d] ml-3 space-y-7">
                 {[
-                  '24/7 dedicated support team — never an answering machine',
-                  'Proven track record with fleets of all sizes across the US',
-                  'Transparent pricing with no hidden fees or surprises',
-                  'Cutting-edge technology integration (ELD, GPS, Digital Reporting)',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-slate-700">
-                    <span className="text-[#c8970d] text-lg leading-none mt-0.5">›</span>
-                    {item}
+                  ['We get in touch', 'A FleetGO specialist calls or emails to learn about your trucks, vendors and what keeps breaking.'],
+                  ['You get a written quote', 'Per-truck pricing for your fleet size, plus any add-ons you choose. Nothing hidden.'],
+                  ['We onboard your trucks', 'Once you approve, we set up your fleet on our platforms and start watching it 24/7.'],
+                ].map(([title, text], i) => (
+                  <li key={title} className="relative pl-8">
+                    <span className="absolute -left-[15px] top-0 w-7 h-7 grid place-items-center bg-[#0b1829] text-[#c8970d] font-mono text-xs font-bold">
+                      {i + 1}
+                    </span>
+                    <div className="font-display font-bold text-[#0b1829]">{title}</div>
+                    <p className="text-sm text-slate-600 leading-relaxed mt-1">{text}</p>
                   </li>
                 ))}
-              </ul>
+              </ol>
 
-              <div className="mt-8 border-l-4 border-[#c8970d] pl-4 bg-yellow-50 py-4 pr-4">
+              <div className="mt-9 border-l-4 border-[#c8970d] pl-4 bg-[#f4f5f7] py-4 pr-4">
                 <p className="text-sm text-slate-700">
-                  <strong className="text-[#0b1829]">Proven in the field:</strong> 13 carrier partners and 400 trucks
-                  under active management — real trucking operations that rely on FleetGO every single day.
+                  <strong className="text-[#0b1829]">Rather talk now?</strong> Call{' '}
+                  <a href="tel:+13313365707" className="text-[#0b1829] font-semibold underline decoration-[#c8970d]">
+                    (331) 336-5707
+                  </a>
+                  . The dispatch desk answers 24/7.
                 </p>
               </div>
             </motion.div>
@@ -184,7 +187,7 @@ export default function Contact() {
             >
               <div className="border border-slate-200 bg-[#f4f5f7]">
                 <div className="bg-[#0b1829] px-6 py-4">
-                  <h3 className="font-oswald uppercase tracking-wider text-white">Request a Free Consultation</h3>
+                  <h3 className="font-display font-bold uppercase tracking-wide text-white">Request a free consultation</h3>
                 </div>
                 <form onSubmit={handleSubmit} className="p-6 space-y-5">
                   <div>

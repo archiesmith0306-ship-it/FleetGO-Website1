@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
+import SectionLabel from './SectionLabel';
 
 const FAQS = [
   {
@@ -44,12 +45,7 @@ export default function FAQ() {
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12">
           <div>
-            <span className="inline-flex items-center gap-2 mb-5">
-              <span className="w-2 h-2 rounded-full border-2 border-[#c8970d]" />
-              <span className="font-mono uppercase tracking-[0.18em] text-[#c8970d] text-[11px]">
-                Questions
-              </span>
-            </span>
+            <SectionLabel id="faq" className="mb-5" />
             <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4vw,3rem)] text-[#0b1829] mb-5">
               Straight answers,{' '}
               <span className="text-[#c8970d]">before you ask.</span>

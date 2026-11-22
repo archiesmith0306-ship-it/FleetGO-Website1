@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Check, ArrowUpRight } from 'lucide-react';
 import { CORE_TIERS, CORE_INCLUDES, ADDONS } from '../data/platforms';
+import SectionLabel from './SectionLabel';
 
 export default function Pricing() {
   const scrollToContact = () =>
@@ -12,12 +13,7 @@ export default function Pricing() {
         {/* Heading */}
         <div className="grid lg:grid-cols-2 gap-10 items-end mb-14">
           <div>
-            <span className="inline-flex items-center gap-2 mb-5">
-              <span className="w-2 h-2 rounded-full border-2 border-[#c8970d]" />
-              <span className="font-mono uppercase tracking-[0.18em] text-[#c8970d] text-[11px]">
-                Pricing
-              </span>
-            </span>
+            <SectionLabel id="pricing" className="mb-5" />
             <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.4vw,3.4rem)] text-[#0b1829]">
               One rate per truck.{' '}
               <span className="text-[#c8970d]">Add only what you need.</span>

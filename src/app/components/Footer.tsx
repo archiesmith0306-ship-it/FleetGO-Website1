@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import Logo from './Logo';
 import { COMPANY, PLATFORMS, STATS } from '../data/platforms';
+import { CHAPTERS, chapterNumber } from '../data/sections';
 
 function useCentralTime() {
   const fmt = () =>
@@ -59,18 +60,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className={heading}>Company</h4>
+            <h4 className={heading}>On this page</h4>
             <ul className="space-y-2.5 text-sm">
-              {[
-                ['Inspection coverage', '#inspection'],
-                ['Fuel savings calculator', '#savings'],
-                ['Pricing', '#pricing'],
-                ['Coverage map', '#coverage'],
-                ['FAQ', '#faq'],
-              ].map(([label, hash]) => (
-                <li key={hash}>
-                  <Link to={{ pathname: '/', hash }} className="hover:text-white transition-colors">
-                    {label}
+              {CHAPTERS.filter((c) => c.id !== 'platforms' && c.id !== 'contact').map((c) => (
+                <li key={c.id}>
+                  <Link to={{ pathname: '/', hash: `#${c.id}` }} className="hover:text-white transition-colors">
+                    <span className="font-mono text-[11px] text-[#c8970d] mr-2">{chapterNumber(c.id)}</span>
+                    {c.label}
                   </Link>
                 </li>
               ))}

@@ -10,6 +10,9 @@
 //
 // Secrets live only on the server, never in the frontend bundle.
 
+// Minimal ambient declaration so the function type-checks without @types/node.
+declare const process: { env: Record<string, string | undefined> };
+
 export const config = { runtime: 'nodejs' };
 
 export default async function handler(req: any, res: any) {

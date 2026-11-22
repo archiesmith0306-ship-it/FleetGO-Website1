@@ -147,6 +147,23 @@ export default function Hero() {
                 </motion.div>
               </AnimatePresence>
 
+              {/* Mobile: the yard pins become a swipeable chip row */}
+              <div className="lg:hidden flex gap-2 overflow-x-auto -mx-6 px-6 pb-1 mb-7 [scrollbar-width:none]">
+                {PINS.map((pin) => (
+                  <button
+                    key={pin.id}
+                    onClick={() => setActive(pin)}
+                    className={`flex-shrink-0 font-mono text-[10px] tracking-[0.12em] px-3 py-2 border transition-colors ${
+                      pin.id === active.id
+                        ? 'bg-[#c8970d] text-[#0b1829] border-[#c8970d] font-bold'
+                        : 'bg-[#0b1829]/80 text-slate-300 border-white/15'
+                    }`}
+                  >
+                    {pin.label}
+                  </button>
+                ))}
+              </div>
+
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => scrollTo('contact')}

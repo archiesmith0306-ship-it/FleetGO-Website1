@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { PLATFORMS } from '../data/platforms';
@@ -140,7 +141,7 @@ export default function Platforms() {
                 </div>
               )}
 
-              <ul className="space-y-4">
+              <ul className="space-y-4 mb-8">
                 {active.capabilities.map((c) => (
                   <li key={c.title} className="flex gap-3">
                     <Check className="w-4 h-4 text-[#c8970d] flex-shrink-0 mt-1" />
@@ -153,6 +154,13 @@ export default function Platforms() {
                   </li>
                 ))}
               </ul>
+              <Link
+                to={`/platforms/${active.slug}`}
+                className="inline-flex items-center gap-2 font-display font-bold uppercase tracking-wide text-sm bg-[#c8970d] hover:bg-[#a87b0a] text-[#0b1829] px-5 py-3 transition-colors"
+              >
+                See {active.name}
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
             </motion.div>
           </AnimatePresence>
         </div>

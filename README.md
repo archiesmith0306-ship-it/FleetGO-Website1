@@ -59,9 +59,22 @@ email client addressed to info@myfleetgo.com.
 - Page views are recorded automatically on every route change (GA4 enhanced measurement).
 - Custom events: `generate_lead` (form submitted), `phone_call_click`, `email_click`,
   `portal_login_click`, `quote_cta_click`, `fleet_size_estimate`, `fuel_calculator_used`,
-  `platform_preview`, `truck_hotspot_view`, `truck_hood_toggle`, `lead_form_fallback`.
+  `platform_preview`, `truck_hotspot_view`, `truck_view_reset`, `lead_form_fallback`.
   No names, emails or phone numbers are sent to Google.
 - **Vercel Web Analytics + Speed Insights** — enable in the Vercel dashboard.
+
+## 3D Truck
+
+The inspection section loads `public/models/fleetgo-truck.glb` (≈5 MB, meshopt-compressed) only when
+the visitor scrolls near it, and stops rendering while it is off-screen.
+
+- Source: [“Volvo VNL 2025” by gelber](https://sketchfab.com/3d-models/volvo-vnl-2025-70f96b5a3eaa429c8a1097abb1cfd3e9),
+  licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The credit line under the viewer
+  is required by the license; keep it.
+- Changes: FleetGO navy paint with gold hood vents, the FleetGO logo on both doors (USDOT/MC spot), the
+  roof fairing and both mud flaps; the original livery, manufacturer badges and third-party logos removed;
+  re-oriented, re-scaled and optimised for the web.
+- Hotspot positions and camera shots live in `src/app/data/hotspots.ts` (+x = front, -z = driver side).
 
 ## Sales Documents
 

@@ -20,7 +20,7 @@ A modern, minimalistic business website for FleetGO, a professional fleet manage
 ## Company Information
 
 - **Phone**: 331-336-5707
-- **Email**: info@myfleetgo.com
+- **Email**: main@myfleetgo.com
 - **Address**: 1811 W Diehl Road Suite 200, Naperville, IL 60563
 - **Founded**: 2026 — founder-led, built on 4+ years of hands-on industry experience
 
@@ -49,7 +49,7 @@ To find your chat id: message your new bot once, then open
 `https://api.telegram.org/bot<YOUR_TOKEN>/getUpdates` and copy `result[].message.chat.id`.
 
 If the endpoint is unreachable, the form falls back to opening the visitor's
-email client addressed to info@myfleetgo.com.
+email client addressed to main@myfleetgo.com.
 
 ## Analytics
 

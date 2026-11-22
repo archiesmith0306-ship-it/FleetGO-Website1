@@ -5,7 +5,7 @@ export const COMPANY = {
   name: 'FleetGO',
   phone: '(331) 336-5707',
   phoneHref: 'tel:+13313365707',
-  email: 'info@myfleetgo.com',
+  email: 'main@myfleetgo.com',
   address: '1811 W Diehl Road, Suite 200, Naperville, IL 60563',
   portalUrl: 'https://pti-guardian-bot.lovable.app/auth',
 };

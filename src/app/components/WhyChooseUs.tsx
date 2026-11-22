@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
               Call Now: (331) 336-5707
             </a>
             <a
-              href="mailto:info@myfleetgo.com"
+              href="mailto:main@myfleetgo.com"
               className="font-oswald uppercase tracking-wider border border-white/30 hover:border-white text-white px-7 py-3.5 text-sm flex items-center gap-2 transition-all"
             >
               Get Free Consultation

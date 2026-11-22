@@ -59,7 +59,8 @@ email client addressed to main@myfleetgo.com.
 - Page views are recorded automatically on every route change (GA4 enhanced measurement).
 - Custom events: `generate_lead` (form submitted), `phone_call_click`, `email_click`,
   `portal_login_click`, `quote_cta_click`, `fleet_size_estimate`, `fuel_calculator_used`,
-  `platform_preview`, `truck_hotspot_view`, `truck_view_reset`, `lead_form_fallback`.
+  `platform_preview`, `truck_hotspot_view`, `truck_view_reset`, `coverage_state_view`,
+  `lead_form_fallback`.
   No names, emails or phone numbers are sent to Google.
 - **Vercel Web Analytics + Speed Insights** — enable in the Vercel dashboard.
 

@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Fuel } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { track } from '../lib/analytics';
+import SectionLabel from './SectionLabel';
 
 const fmt = (n: number) =>
   '$' + Math.round(n).toLocaleString('en-US');
@@ -61,12 +62,7 @@ export default function SavingsCalculator() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Copy */}
           <div>
-            <span className="inline-flex items-center gap-2 mb-6">
-              <Fuel className="w-4 h-4 text-[#c8970d]" />
-              <span className="font-mono uppercase tracking-[0.18em] text-[#c8970d] text-[11px]">
-                Fuel saving platform
-              </span>
-            </span>
+            <SectionLabel id="savings" className="mb-6" />
             <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.2vw,3.25rem)] mb-6">
               What could your fleet{' '}
               <span className="text-[#c8970d]">save on diesel?</span>

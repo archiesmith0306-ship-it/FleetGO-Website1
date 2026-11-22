@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { PLATFORMS } from '../data/platforms';
 import { track } from '../lib/analytics';
+import SectionLabel from './SectionLabel';
 
 export default function Platforms() {
   const [open, setOpen] = useState(0);
@@ -14,10 +15,13 @@ export default function Platforms() {
       <div className="max-w-7xl mx-auto px-6 py-20">
         {/* Heading */}
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 items-end mb-14">
+          <div>
+          <SectionLabel id="platforms" />
           <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.4vw,3.4rem)] text-[#0b1829]">
             Six platforms,{' '}
             <span className="text-[#c8970d] lg:block">one team, one invoice.</span>
           </h2>
+          </div>
           <div>
             <p className="text-slate-600 text-lg leading-relaxed mb-5">
               Four of them come with your per-truck plan. Two are paid add-ons that only make

@@ -166,8 +166,8 @@ export default function Contact() {
 
               <div className="mt-8 border-l-4 border-[#c8970d] pl-4 bg-yellow-50 py-4 pr-4">
                 <p className="text-sm text-slate-700">
-                  <strong className="text-[#0b1829]">Trusted clients include:</strong> Primeweek Inc, Dadakhon Trans, 2M Trucking,
-                  Verona Express, and more — real trucking operations that rely on FleetGO every single day.
+                  <strong className="text-[#0b1829]">Proven in the field:</strong> 13 carrier partners and 400 trucks
+                  under active management — real trucking operations that rely on FleetGO every single day.
                 </p>
               </div>
             </motion.div>

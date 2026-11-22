@@ -1,15 +1,14 @@
-const partners = [
-  'Primeweek Inc',
-  'Dadakhon Trans',
-  '2M Trucking',
-  'TR Auto Trucking',
-  'Siddikov LLC',
-  'Verona Express',
-  'Jaykhun Cargo',
+const proofPoints = [
+  '13 Carrier Partners',
+  '400 Trucks Under Management',
+  '24/7 Live Coverage',
+  '14 In-House Specialists',
+  '1,000+ Partner Service Locations',
+  '48 States Covered',
 ];
 
 export default function TrustedPartners() {
-  const loop = [...partners, ...partners];
+  const loop = [...proofPoints, ...proofPoints];
 
   return (
     <section className="bg-[#f4f5f7] border-y border-slate-200 py-0">
@@ -27,12 +26,12 @@ export default function TrustedPartners() {
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#f4f5f7] to-transparent z-10" />
 
         <div className="flex gap-14 animate-marquee whitespace-nowrap">
-          {loop.map((name, i) => (
+          {loop.map((label, i) => (
             <span
-              key={`${name}-${i}`}
-              className="font-oswald uppercase tracking-wider text-xl md:text-2xl text-slate-500 hover:text-[#0b1829] transition-colors flex-shrink-0"
+              key={`${label}-${i}`}
+              className="font-oswald uppercase tracking-wider text-xl md:text-2xl text-slate-500 flex-shrink-0"
             >
-              {name}
+              {label}
             </span>
           ))}
         </div>

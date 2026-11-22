@@ -24,15 +24,15 @@ A modern, minimalistic business website for FleetGO, a professional fleet manage
 - **Address**: 1811 W Diehl Road Suite 200, Naperville, IL 60563
 - **Founded**: 2026 — founder-led, built on 4+ years of hands-on industry experience
 
-### Trusted Vendors
-- Penske
-- Ryder
-- MHC Kenworth
-- Samsara
+### Coverage
+- 13 carrier partners
+- 400 trucks under management
+- 1,000+ partner service locations
+- 48 states covered
 
-### Valued Clients
-- Dadakhon Trans Corp
-- Primeweek
+### Operating Scale
+- 24/7 live coverage
+- 14 in-house specialists
 
 ## Lead Notifications (Telegram)
 

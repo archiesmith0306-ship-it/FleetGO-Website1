@@ -13,10 +13,10 @@ export default function Platforms() {
     <section id="platforms" className="bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-6 py-20">
         {/* Heading */}
-        <div className="grid lg:grid-cols-2 gap-10 items-end mb-14">
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 items-end mb-14">
           <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.4vw,3.4rem)] text-[#0b1829]">
             Six platforms,{' '}
-            <span className="text-[#c8970d]">one team, one invoice.</span>
+            <span className="text-[#c8970d] lg:block">one team, one invoice.</span>
           </h2>
           <div>
             <p className="text-slate-600 text-lg leading-relaxed mb-5">

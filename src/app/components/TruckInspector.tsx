@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, RotateCcw } from 'lucide-react';
+import { Link } from 'react-router';
+import { ArrowUpRight, Check, RotateCcw } from 'lucide-react';
 import { HOTSPOTS, MODEL_CREDIT, type Hotspot } from '../data/hotspots';
 import { track } from '../lib/analytics';
 
@@ -46,7 +47,7 @@ export default function TruckInspector() {
     <section id="inspection" className="bg-[#060e1a] text-white border-y border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-20">
         {/* Heading */}
-        <div className="grid lg:grid-cols-2 gap-10 items-end mb-12">
+        <div className="grid lg:grid-cols-[1.35fr_1fr] gap-8 items-end mb-12">
           <div>
             <span className="inline-flex items-center gap-2 mb-5">
               <span className="w-2 h-2 rounded-full border-2 border-[#c8970d]" />
@@ -56,7 +57,7 @@ export default function TruckInspector() {
             </span>
             <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.4vw,3.4rem)]">
               Every system we watch,{' '}
-              <span className="text-[#c8970d]">on every truck.</span>
+              <span className="text-[#c8970d] lg:block">on every truck.</span>
             </h2>
           </div>
           <p className="text-slate-400 text-lg leading-relaxed">
@@ -71,7 +72,7 @@ export default function TruckInspector() {
             ref={ref}
             className="relative border border-[#c8970d]/20 overflow-hidden"
             style={{
-              height: 'clamp(380px, 52vw, 560px)',
+              minHeight: 'clamp(380px, 52vw, 560px)',
               background: 'radial-gradient(ellipse 80% 70% at 50% 42%, #f5f7fa 0%, #dde3ea 55%, #aeb9c6 100%)',
             }}
           >
@@ -114,9 +115,6 @@ export default function TruckInspector() {
               >
                 <RotateCcw className="w-3 h-3" /> Reset view
               </button>
-              <span className="hidden sm:flex font-mono text-[10px] uppercase tracking-[0.14em] px-3 py-2 border border-white/15 bg-[#0b1829]/90 text-slate-400 items-center">
-                Drag to rotate · scroll to zoom
-              </span>
             </div>
 
           </div>
@@ -146,22 +144,34 @@ export default function TruckInspector() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
-                className="flex-1 border border-white/10 bg-[#0b1829] p-7"
+                className="flex-1 flex flex-col border border-white/10 bg-[#0b1829] p-7 lg:p-8"
               >
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#c8970d] mb-2">
+                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#c8970d] mb-3">
                   Tracked by {active.platform}
                 </div>
-                <h3 className="font-display font-extrabold tracking-[-0.02em] text-2xl mb-6">
+                <h3 className="font-display font-extrabold tracking-[-0.02em] text-3xl lg:text-4xl leading-tight mb-3">
                   {active.label}
                 </h3>
-                <ul className="space-y-3">
+                <p className="text-slate-300 text-base leading-relaxed mb-6">{active.summary}</p>
+                <ul className="border-t border-white/10">
                   {active.checks.map((c) => (
-                    <li key={c} className="flex items-start gap-3 text-sm text-slate-300">
-                      <Check className="w-4 h-4 text-[#c8970d] flex-shrink-0 mt-0.5" />
-                      {c}
+                    <li key={c.title} className="flex items-start gap-4 py-3.5 border-b border-white/10">
+                      <span className="w-7 h-7 flex-shrink-0 grid place-items-center bg-[#c8970d]/15 border border-[#c8970d]/40">
+                        <Check className="w-4 h-4 text-[#c8970d]" />
+                      </span>
+                      <span>
+                        <span className="block font-semibold text-base text-white">{c.title}</span>
+                        <span className="block text-sm text-slate-400 mt-0.5">{c.detail}</span>
+                      </span>
                     </li>
                   ))}
                 </ul>
+                <Link
+                  to={`/platforms/${active.slug}`}
+                  className="mt-auto pt-6 inline-flex items-center gap-2 font-display font-bold uppercase tracking-wide text-sm text-[#c8970d] hover:text-white transition-colors self-start"
+                >
+                  See {active.platform} <ArrowUpRight className="w-4 h-4" />
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>

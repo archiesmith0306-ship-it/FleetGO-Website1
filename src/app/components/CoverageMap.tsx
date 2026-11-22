@@ -209,7 +209,7 @@ export default function CoverageMap() {
 
       <div className="max-w-7xl mx-auto px-6 py-20">
         {/* Heading */}
-        <div className="grid lg:grid-cols-2 gap-10 items-end mb-12">
+        <div className="grid lg:grid-cols-[1.65fr_1fr] gap-6 items-end mb-12">
           <div>
             <span className="inline-flex items-center gap-2 mb-5">
               <span className="w-2 h-2 rounded-full border-2 border-[#c8970d]" />
@@ -219,7 +219,7 @@ export default function CoverageMap() {
             </span>
             <h2 className="font-display font-extrabold tracking-[-0.03em] leading-[1.02] text-[clamp(1.9rem,4.4vw,3.4rem)]">
               A partner shop near{' '}
-              <span className="text-[#c8970d]">every mile you run.</span>
+              <span className="text-[#c8970d] lg:block">every mile you run.</span>
             </h2>
           </div>
           <p className="text-slate-400 text-lg leading-relaxed">

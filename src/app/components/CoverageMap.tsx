@@ -95,7 +95,7 @@ export default function CoverageMap() {
 
             <path d={US_PATH} fill="url(#cov-land)" stroke="#c8970d" strokeOpacity="0.55" strokeWidth="2.4" strokeLinejoin="round" />
 
-            <g filter="url(#cov-shadow)">
+            <g>
               {markers.map((m, i) => (
                 <circle key={i} cx={m.x} cy={m.y} r="9" fill={m.color} stroke="#ffffff" strokeWidth="2.2" />
               ))}

@@ -13,6 +13,8 @@ const GLASS = '#3d6489';
 
 const paint = { color: WHITE, metalness: 0.35, roughness: 0.28 };
 const chrome = { color: CHROME, metalness: 1, roughness: 0.18 };
+const reduceMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function Wheel({ position, mirror = false }: { position: [number, number, number]; mirror?: boolean }) {
   const face = mirror ? -0.17 : 0.17;
@@ -50,7 +52,7 @@ function Truck({
 
   useFrame((_, delta) => {
     // Idle turntable; holds still while the hood is up so the engine stays in view.
-    if (root.current && !hoodOpen) root.current.rotation.y += delta * 0.12;
+    if (root.current && !hoodOpen && !reduceMotion) root.current.rotation.y += delta * 0.12;
     if (hood.current) {
       const target = hoodOpen ? -1.15 : 0;
       hood.current.rotation.z += (target - hood.current.rotation.z) * Math.min(1, delta * 4);

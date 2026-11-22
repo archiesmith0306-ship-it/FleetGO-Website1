@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
+import { MotionConfig } from 'motion/react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navigation from './components/Navigation';
@@ -10,6 +11,7 @@ const PlatformPage = lazy(() => import('./pages/PlatformPage'));
 
 export default function App() {
   return (
+    <MotionConfig reducedMotion="user">
     <BrowserRouter>
       <ScrollManager />
       <div className="min-h-screen bg-white text-[#0b1829] pb-14 lg:pb-0">
@@ -29,5 +31,6 @@ export default function App() {
       <Analytics />
       <SpeedInsights />
     </BrowserRouter>
+    </MotionConfig>
   );
 }

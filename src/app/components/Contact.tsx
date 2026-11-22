@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
 import { useState } from 'react';
+import { track } from '../lib/analytics';
 
 export default function Contact() {
   const emptyForm = {
@@ -43,10 +44,12 @@ export default function Contact() {
       });
       if (!res.ok) throw new Error('request failed');
       setStatus('sent');
+      track('generate_lead', { lead_source: 'website_form', fleet_size: formData.fleetSize || 'not_given' });
       setFormData(emptyForm);
     } catch {
       // If the lead API isn't reachable, fall back to the visitor's email client.
       setStatus('error');
+      track('lead_form_fallback', { reason: 'api_unreachable' });
       mailtoFallback();
     }
   };

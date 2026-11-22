@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Phone, ArrowUpRight, LogIn } from 'lucide-react';
 import HeroVideoBackground from './HeroVideoBackground';
 import { COMPANY, STATS, CORE_TIERS } from '../data/platforms';
+import { track } from '../lib/analytics';
 
 /** Live fleet-operations events surfaced over the yard. Click to inspect. */
 const PINS = [
@@ -208,6 +209,7 @@ export default function Hero() {
                 max={500}
                 value={trucks}
                 onChange={(e) => setTrucks(Math.max(1, Math.min(500, Number(e.target.value) || 1)))}
+                onBlur={() => track('fleet_size_estimate', { trucks })}
                 className="w-full bg-transparent text-white font-display font-bold text-xl focus:outline-none border-b border-white/20 focus:border-[#c8970d] transition-colors"
               />
             </label>

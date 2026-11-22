@@ -33,10 +33,39 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="FleetGO — Fleet Management &amp; Maintenance Services" />
-    <meta
-      name="twitter:description"
+    <meta name="twitter:description"
       content="24/7 fleet management, maintenance, ELD compliance, and driver support for fleets of every size."
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "FleetGO",
+        "url": "https://www.myfleetgo.com/",
+        "logo": "https://www.myfleetgo.com/favicon.svg",
+        "description": "24/7 fleet maintenance management, PTI and PM monitoring, safety monitoring and fuel savings for trucking companies.",
+        "telephone": "+1-331-336-5707",
+        "email": "info@myfleetgo.com",
+        "foundingDate": "2026",
+        "numberOfEmployees": { "@type": "QuantitativeValue", "value": 14 },
+        "areaServed": { "@type": "Country", "name": "United States" },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "00:00",
+          "closes": "23:59"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1811 W Diehl Road, Suite 200",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60563",
+          "addressCountry": "US"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

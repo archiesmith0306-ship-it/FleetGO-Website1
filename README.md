@@ -72,7 +72,7 @@ the visitor scrolls near it, and stops rendering while it is off-screen.
   licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The credit line under the viewer
   is required by the license; keep it.
 - Changes: FleetGO navy paint with gold hood vents, the FleetGO logo on both doors (USDOT/MC spot), the
-  grille and both mud flaps; the original livery, manufacturer badges and third-party logos removed;
+  roof fairing and both mud flaps; the original livery, manufacturer badges and third-party logos removed;
   re-oriented, re-scaled and optimised for the web.
 - Hotspot positions and camera shots live in `src/app/data/hotspots.ts` (+x = front, -z = driver side).
 

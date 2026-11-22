@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import Hero from './components/Hero';
 import CoverageMap from './components/CoverageMap';
 import Services from './components/Services';
 import WhyChooseUs from './components/WhyChooseUs';
 import TrustedPartners from './components/TrustedPartners';
+import Promise from './components/Promise';
+import Platforms from './components/Platforms';
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Navigation from './components/Navigation';
@@ -18,6 +22,8 @@ export default function App() {
       <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <Hero />
       <TrustedPartners />
+      <Promise />
+      <Platforms />
       <CoverageMap />
       <Services />
       <WhyChooseUs />
@@ -98,6 +104,8 @@ export default function App() {
           </div>
         </div>
       </footer>
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }

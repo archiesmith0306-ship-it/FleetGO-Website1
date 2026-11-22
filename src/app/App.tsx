@@ -9,6 +9,9 @@ import WhyChooseUs from './components/WhyChooseUs';
 import TrustedPartners from './components/TrustedPartners';
 import Promise from './components/Promise';
 import Platforms from './components/Platforms';
+import SavingsCalculator from './components/SavingsCalculator';
+import FAQ from './components/FAQ';
+import TruckInspector from './components/TruckInspector';
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Navigation from './components/Navigation';
@@ -27,7 +30,10 @@ export default function App() {
       <CoverageMap />
       <Services />
       <WhyChooseUs />
+      <TruckInspector />
+      <SavingsCalculator />
       <Pricing />
+      <FAQ />
       <Contact />
 
       {/* Footer */}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Phone, ArrowUpRight } from 'lucide-react';
 import { COMPANY } from '../data/platforms';
@@ -25,29 +25,45 @@ export function MobileCTA() {
   );
 }
 
-/** Scroll to the hash target after navigation, or to the top for a new page. */
+/**
+ * Scroll behaviour that cooperates with the page curtain:
+ * - hash links seek their section once it has mounted (after the curtain exit);
+ * - re-clicking the current page (e.g. the logo on Home) glides to the top;
+ * - a new page's scroll reset is done by AnimatePresence while the curtain covers the screen.
+ */
 export function ScrollManager() {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
+  const prevPath = useRef(pathname);
 
   useEffect(() => {
+    const samePage = prevPath.current === pathname;
+    prevPath.current = pathname;
+
     if (!hash) {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      if (samePage) window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    // Wait a frame so the target section exists after a route change.
     const id = hash.slice(1);
     let tries = 0;
+    let raf = 0;
     const seek = () => {
       const el = document.getElementById(id);
       if (el) {
-        const y = el.getBoundingClientRect().top + window.scrollY - 64;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      } else if (tries++ < 20) {
-        requestAnimationFrame(seek);
+        // Layout offset ignores the page's fade-up transform, so we land exactly under the nav.
+        let y = -64;
+        for (let n: HTMLElement | null = el; n; n = n.offsetParent as HTMLElement | null) y += n.offsetTop;
+        window.scrollTo({ top: y, behavior: samePage ? 'smooth' : 'auto' });
+      } else if (tries++ < 180) {
+        raf = requestAnimationFrame(seek);
       }
     };
-    requestAnimationFrame(seek);
-  }, [pathname, hash]);
+    // On a page change, wait for the outgoing page to leave before seeking.
+    const t = window.setTimeout(() => (raf = requestAnimationFrame(seek)), samePage ? 0 : 480);
+    return () => {
+      clearTimeout(t);
+      cancelAnimationFrame(raf);
+    };
+  }, [pathname, hash, key]);
 
   return null;
 }
